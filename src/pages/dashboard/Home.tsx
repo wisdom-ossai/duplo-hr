@@ -1,5 +1,11 @@
+import { StatCards } from "@/components";
+
 const DashboardHome = () => {
-  return <div>DashboardHome</div>;
+  return (
+    <div>
+      <StatCards />
+    </div>
+  );
 };
 
 export default DashboardHome;
