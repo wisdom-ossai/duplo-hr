@@ -1,10 +1,4 @@
 import {
-  User,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from "firebase/auth";
-import {
   FC,
   ReactNode,
   createContext,
@@ -13,13 +7,21 @@ import {
   useEffect,
   useState,
 } from "react";
-import { auth } from "../config/firebase";
 import { useNavigate } from "react-router-dom";
+import {
+  User,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import { auth, db } from "@/config/firebase";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { TCreateUser } from "@/types";
 
 export type TAuthContext = {
   user: User | null;
   signin: (email: string, password: string) => Promise<void>;
-  signup: (email: string, password: string) => Promise<void>;
+  signup: (payload: TCreateUser) => Promise<void>;
   signout: () => Promise<void>;
   errorMsg: string;
   processing: boolean;
@@ -44,13 +46,15 @@ const AuthProvider: FC<TAuthProviderProps> = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [processing, setProcessing] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      setLoading(false);
       if (!authUser) return navigate("/");
       setUser(authUser);
-      return navigate("/dashboard");
+      navigate("/dashboard");
     });
 
     return () => {
@@ -83,17 +87,36 @@ const AuthProvider: FC<TAuthProviderProps> = ({ children }) => {
     }
   };
 
-  const signup = async (email: string, password: string) => {
+  const signup = async ({
+    email,
+    password,
+    firstName,
+    lastName,
+    designation,
+  }: TCreateUser) => {
     try {
       setErrorMsg("");
       setProcessing(true);
 
       if (email && password) {
-        const user = await createUserWithEmailAndPassword(
+        const response = await createUserWithEmailAndPassword(
           auth,
           email,
           password
         );
+        if (response) {
+          const res = await setDoc(doc(db, "users", response.user.uid), {
+            email,
+            firstName,
+            lastName,
+            designation,
+            isActive: true,
+            createdAt: serverTimestamp(),
+            verified: false,
+          });
+
+          console.log(res);
+        }
         console.log(user);
       }
     } catch (error: unknown) {
@@ -115,6 +138,8 @@ const AuthProvider: FC<TAuthProviderProps> = ({ children }) => {
   const signout = () => {
     return signOut(auth);
   };
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <AuthContext.Provider

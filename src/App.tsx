@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { AuthLayout, DashboardLayout } from "./layouts";
 import { Suspense, lazy } from "react";
+import { AuthLayout, DashboardLayout } from "@/layouts";
 
 const SignInPage = lazy(() => import("./pages/auth/SignInPage"));
 const SignUpPage = lazy(() => import("./pages/auth/SignUpPage"));

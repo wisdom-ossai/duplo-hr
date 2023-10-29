@@ -1,9 +1,11 @@
 import { StatCards } from "@/components";
+import BarchartCard from "@/components/BarchartCard";
 
 const DashboardHome = () => {
   return (
-    <div>
+    <div className="flex flex-col gap-8">
       <StatCards />
+      <BarchartCard />
     </div>
   );
 };

@@ -1,5 +1,3 @@
-import React from "react";
-
 const ProtectedRoute = () => {
   return <div>ProtectedRoute</div>;
 };

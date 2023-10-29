@@ -1,6 +1,7 @@
 import { FormEvent, RefObject, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthProvider";
+import { Input } from "@/components/ui";
+import { useAuth } from "@/contexts/AuthProvider";
 
 const SignInPage = () => {
   const { signin, errorMsg, processing } = useAuth();
@@ -17,16 +18,16 @@ const SignInPage = () => {
     }
   };
   return (
-    <>
+    <div>
       {errorMsg && <div>{errorMsg}</div>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
         <div>
           <label>Email</label>
-          <input type="text" name="email" id="email" ref={emailRef} />
+          <Input type="text" name="email" id="email" ref={emailRef} />
         </div>
         <div>
           <label>Password</label>
-          <input
+          <Input
             type="password"
             name="password"
             id="password"
@@ -43,7 +44,7 @@ const SignInPage = () => {
           Don't have an account? <Link to="/signup">Sign Up</Link>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

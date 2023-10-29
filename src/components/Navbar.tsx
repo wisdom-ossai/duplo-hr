@@ -1,19 +1,15 @@
-import { Button, Metric, Subtitle, TextInput } from "@tremor/react";
-import { Search } from "./icons";
+import SearchInput from "./SearchInput";
 
 const Navbar = () => {
   return (
-    <nav className="flex items-center pt-4 pb-8 justify-between">
+    <nav className="flex items-start pt-4 pb-8 justify-between">
       <div className="flex-auto">
-        <Metric>Dashboard</Metric>
-        <Subtitle>Hello Thomas. Welcome to Galucter</Subtitle>
+        <h1 className="text-lg font-bold text-gray-900">Dashboard</h1>
+        <small className="text-gray-200">
+          Hello Thomas. Welcome to Galucter
+        </small>
       </div>
-      <div className="flex items-center gap-0 justify-center flex-1">
-        <TextInput className="border rounded-e-none" />
-        <Button variant="primary" size="xs" className="rounded-s-none">
-          <Search />
-        </Button>
-      </div>
+      <SearchInput />
     </nav>
   );
 };
