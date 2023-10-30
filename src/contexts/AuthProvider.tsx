@@ -15,7 +15,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth, db } from "@/config/firebase";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { TCreateUser } from "@/types";
 
 export type TAuthContext = {
@@ -49,11 +49,22 @@ const AuthProvider: FC<TAuthProviderProps> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
 
+  const fetchUserById = async (id: string) => {
+    try {
+      const userRef = doc(db, "users", id);
+      const res = await getDoc(userRef);
+      return res.data();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
       setLoading(false);
       if (!authUser) return navigate("/");
-      setUser(authUser);
+      const data = await fetchUserById(authUser.uid);
+      setUser({ ...authUser, ...data });
       navigate("/dashboard");
     });
 
@@ -113,6 +124,8 @@ const AuthProvider: FC<TAuthProviderProps> = ({ children }) => {
             isActive: true,
             createdAt: serverTimestamp(),
             verified: false,
+            photoUrl: "",
+            role: "user",
           });
 
           console.log(res);
@@ -121,8 +134,6 @@ const AuthProvider: FC<TAuthProviderProps> = ({ children }) => {
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
-        // Handle known error types like Error
-        console.log(error, "vvvan");
         if (error.message.includes("auth/invalid-login-credentials")) {
           setErrorMsg("Invalid Email/Password");
         }

@@ -56,9 +56,8 @@ const SignUpPage = () => {
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     const { name } = e.target;
-    const emailValue = emailRef.current?.value || "";
-    const passwordValue = passwordRef.current?.value || "";
-    console.log(name);
+    const emailValue = emailRef.current?.value ?? "";
+    const passwordValue = passwordRef.current?.value ?? "";
     if (name === "email") {
       if (emailValue && !isEmailValid(emailValue)) {
         setFieldErrors((prev) => ({ ...prev, email: "Invalid email address" }));

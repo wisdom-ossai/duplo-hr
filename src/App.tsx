@@ -5,6 +5,7 @@ import { AuthLayout, DashboardLayout } from "@/layouts";
 const SignInPage = lazy(() => import("./pages/auth/SignInPage"));
 const SignUpPage = lazy(() => import("./pages/auth/SignUpPage"));
 const DashboardHome = lazy(() => import("./pages/dashboard/Home"));
+const UsersPage = lazy(() => import("./pages/dashboard/Users"));
 
 function App() {
   return (
@@ -31,7 +32,7 @@ function App() {
       >
         <Route index element={<Navigate to="/lsosi" />} />
         <Route path="dashboard" element={<DashboardHome />} />
-        <Route path="signup" element={<SignUpPage />} />
+        <Route path="users" element={<UsersPage />} />
       </Route>
     </Routes>
   );

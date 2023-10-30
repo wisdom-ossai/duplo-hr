@@ -19,4 +19,5 @@ export type User = TCreateUser & {
   isActive: boolean;
   photoUrl: string;
   role: "admin" | "user" | "hr";
+  id: string;
 };
