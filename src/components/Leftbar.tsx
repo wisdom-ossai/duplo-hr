@@ -94,7 +94,7 @@ const routes = [
 const Leftbar = () => {
   const location = useLocation();
   return (
-    <aside className="w-16 lg:w-[325px] flex flex-col justify-center items-center gap-12 h-full bg-white px-4">
+    <aside className="w-16 lg:w-[400px] flex flex-col justify-center items-center gap-12 h-full bg-white px-4">
       <div className="mt-8 w-full">
         <h1 className="text-gray-900 font-bold text-lg">Human R.</h1>
       </div>
