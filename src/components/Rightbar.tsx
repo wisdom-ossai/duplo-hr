@@ -6,48 +6,7 @@ import RightItems from "./RightItems";
 import { ScrollArea } from "./ui/scroll-area";
 import { AlignRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const messages = [
-  {
-    name: "Cameron Williamson",
-    avatar: "",
-    fallback: null,
-    description: "Have you planned any deadline...",
-  },
-  {
-    name: "Jacob Jones",
-    avatar: "",
-    fallback: null,
-    description: "The candidate has been shortlisted",
-  },
-];
-
-const jobs = [
-  {
-    name: "Product Designer",
-    avatar: "",
-    fallback: null,
-    description: "Spotify, Singapore - 6 hours ago",
-  },
-  {
-    name: "iOS Developer",
-    avatar: "",
-    fallback: null,
-    description: "San Fransisco, CA - 2 Days ago",
-  },
-  {
-    name: "Brand Strategist",
-    avatar: "",
-    fallback: null,
-    description: "New york, US - 2 Days ago",
-  },
-  {
-    name: "Jr Frontend Engineer",
-    avatar: "",
-    fallback: null,
-    description: "Spotify, Singapore - 2 Days ago",
-  },
-];
+import { jobsData, messagesData } from "@/utils/data";
 
 const Rightbar = ({ open, toggle }: { open: boolean; toggle: () => void }) => {
   return (
@@ -91,8 +50,8 @@ const Rightbar = ({ open, toggle }: { open: boolean; toggle: () => void }) => {
       </div>
 
       <ScrollArea className="flex flex-col gap-8 mt-8 h-[65vh] px-5">
-        <RightItems name="Messages" data={messages} />
-        <RightItems name="Recent Added Jobs" data={jobs} className="mt-5" />
+        <RightItems name="Messages" data={messagesData} />
+        <RightItems name="Recent Added Jobs" data={jobsData} className="mt-5" />
       </ScrollArea>
     </aside>
   );

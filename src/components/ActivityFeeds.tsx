@@ -1,50 +1,10 @@
 import { Card } from "@/components/ui";
 import { CardHead } from "./Meetings";
-import { Avatar, AvatarImage } from "./ui/Avatar";
-import { AvatarFallback } from "@radix-ui/react-avatar";
+// import { Avatar, AvatarImage } from "./ui/Avatar";
+// import { AvatarFallback } from "@radix-ui/react-avatar";
 import { cn } from "@/lib/utils";
-
-const filterOptions = [
-  {
-    label: "All Activity",
-    value: "all",
-  },
-  {
-    label: "Applying",
-    value: "applying",
-  },
-  {
-    label: "Creation",
-    value: "creation",
-  },
-];
-
-const feedsData = [
-  {
-    id: "1",
-    actor: "Marvin Mckinney",
-    subject: "Product Designer",
-    activity: "applying",
-    createdAt: new Date(),
-    avatar: null,
-  },
-  {
-    id: "2",
-    actor: "John Cooper",
-    subject: "Job Hunt",
-    activity: "creation",
-    createdAt: new Date(),
-    avatar: null,
-  },
-  {
-    id: "3",
-    actor: "Johnny Wilson",
-    subject: "Frontend Engineer",
-    activity: "applying",
-    createdAt: new Date(),
-    avatar: null,
-  },
-];
+import { feedsData, filterOptions } from "@/utils/data";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/Avatar";
 
 const getBadgeClass = (activity: string) => {
   switch (activity) {
@@ -75,8 +35,9 @@ const Feed = ({ data }: { data: (typeof feedsData)[0] }) => {
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex items-center gap-4">
+        {/* <div className="w-8 h-8 rounded-full bg-slate-500">{data.avatar}</div> */}
         <Avatar>
-          <AvatarImage></AvatarImage>
+          <AvatarImage src="https://github.com/shadcn.png" alt=""></AvatarImage>
           <AvatarFallback>{data.avatar}</AvatarFallback>
         </Avatar>
 

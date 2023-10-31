@@ -1,10 +1,11 @@
 import { useAuth } from "@/contexts/AuthProvider";
 import SearchInput from "./SearchInput";
 import { Button } from "./ui";
-import { AlignLeft, AlignRight } from "lucide-react";
+import { AlignLeft } from "lucide-react";
+import Drawer from "./Drawer";
+import { Leftbar } from ".";
 
 const Navbar = ({
-  toggleLeft,
   toggleRight,
 }: {
   toggleLeft: () => void;
@@ -14,13 +15,9 @@ const Navbar = ({
   return (
     <nav className="flex items-start pb-8 justify-between">
       <div className="flex-auto flex items-start gap-4">
-        <Button
-          variant="ghost"
-          className="block md:hidden"
-          onClick={toggleLeft}
-        >
-          <AlignRight />
-        </Button>
+        <Drawer>
+          <Leftbar />
+        </Drawer>
         <div>
           <h1 className="text-lg font-bold text-gray-900">Dashboard</h1>
           <small className="text-gray-200">

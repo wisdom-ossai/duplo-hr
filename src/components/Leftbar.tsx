@@ -13,9 +13,9 @@ import {
   Site,
 } from "@/components/icons";
 import { useAuth } from "@/contexts/AuthProvider";
-import { AlignLeft, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 
-const routes = [
+export const routes = [
   {
     name: "MENU",
     items: [
@@ -93,25 +93,28 @@ const routes = [
     ],
   },
 ];
-
-const Leftbar = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
+/* 
+{ open, onClose }: { open: boolean; onClose: () => void }
+fixed left-0 top-0 bottom-0 z-50
+*/
+const Leftbar = () => {
   const { user, signout } = useAuth();
   const location = useLocation();
 
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 bottom-0 z-50 slide-in-from-left-6 md:w-[275px] lg:w-[375px] md:block md:relative h-full bg-white px-4",
-        open ? "flex" : "hidden"
+        "slide-in-from-left-6 md:w-[275px] lg:w-[375px] md:block md:relative h-full bg-white px-4"
+        // open ? "flex" : "hidden"
       )}
     >
       <div className="flex flex-col justify-center items-start gap-12">
         <div className="mt-8 w-full flex items-center justify-between">
           <h1 className="text-gray-900 font-bold text-lg ml-8">Human R.</h1>
 
-          <Button variant="ghost" className="block md:hidden" onClick={onClose}>
+          {/* <Button variant="ghost" className="block md:hidden" onClick={onClose}>
             <AlignLeft />
-          </Button>
+          </Button> */}
         </div>
         <div className="flex-1 w-full">
           <div className="flex flex-col gap-8">
