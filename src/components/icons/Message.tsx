@@ -1,5 +1,3 @@
-import React from "react";
-
 const Message = ({ active }: { active: boolean }) => {
   return (
     <svg

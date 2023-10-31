@@ -1,5 +1,3 @@
-import React from "react";
-
 const Referral = ({ active }: { active: boolean }) => {
   return (
     <svg

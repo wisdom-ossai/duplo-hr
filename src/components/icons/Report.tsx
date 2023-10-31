@@ -1,5 +1,3 @@
-import React from "react";
-
 const Report = ({ active }: { active: boolean }) => {
   return (
     <svg

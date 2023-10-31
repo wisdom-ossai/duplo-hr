@@ -1,5 +1,3 @@
-import React from "react";
-
 const Site = ({ active }: { active: boolean }) => {
   return (
     <svg

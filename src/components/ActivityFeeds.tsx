@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "@/components/ui";
 import { CardHead } from "./Meetings";
 import { Avatar, AvatarImage } from "./ui/Avatar";

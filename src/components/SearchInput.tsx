@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, Input } from "@/components/ui";
 import { Search } from "@/components/icons";
 

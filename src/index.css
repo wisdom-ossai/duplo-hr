@@ -19,7 +19,7 @@
 
 @layer base {
   .progress-ring__circle {
-    strokedasharray: 400, 400;
+    stroke-dasharray: 400, 400;
     transition: strokeDashoffset 0.35s;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;

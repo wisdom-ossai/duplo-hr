@@ -1,5 +1,3 @@
-import React from "react";
-
 const Dashboard = ({ active }: { active: boolean }) => {
   return (
     <svg

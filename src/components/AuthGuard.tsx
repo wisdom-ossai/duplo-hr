@@ -1,5 +1,5 @@
 import { useAuth } from "@/contexts/AuthProvider";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const AuthGuard = ({

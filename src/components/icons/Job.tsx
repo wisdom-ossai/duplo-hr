@@ -1,5 +1,3 @@
-import React from "react";
-
 const Job = ({ active }: { active: boolean }) => {
   return (
     <svg

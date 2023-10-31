@@ -1,6 +1,3 @@
-// import { getPallette } from "@/lib/utils";
-import React from "react";
-
 const TrendUp = ({
   className = "",
 }: // color = "#292D32",

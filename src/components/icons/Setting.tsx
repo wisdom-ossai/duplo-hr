@@ -1,5 +1,3 @@
-import React from "react";
-
 const Setting = ({ active }: { active: boolean }) => {
   return (
     <svg

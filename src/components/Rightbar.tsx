@@ -49,7 +49,7 @@ const jobs = [
 
 const Rightbar = () => {
   return (
-    <aside className="fixed top-0 bottom-0 right-0 hidden w-[400px] lg:block lg:relative h-full bg-white px-5">
+    <aside className="fixed top-0 bottom-0 right-0 hidden md:w-[300px] lg:w-[400px] md:block md:relative h-full bg-white px-5">
       <div className="flex items-center justify-end gap-6 py-4 px-5">
         <Button variant="ghost" className="p-0 rounded-full">
           <NeedHelp />
