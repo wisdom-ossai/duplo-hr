@@ -7,7 +7,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -42,7 +42,6 @@ export const useAuth = () => {
 };
 
 const AuthProvider: FC<TAuthProviderProps> = ({ children }) => {
-  const location = useLocation();
   const navigate = useNavigate();
   const [user, setUser] = useState<TUser | null>(null);
   const [processing, setProcessing] = useState(false);
@@ -65,15 +64,7 @@ const AuthProvider: FC<TAuthProviderProps> = ({ children }) => {
         if (!authUser) return navigate("/");
         const data = await fetchUserById(authUser.uid);
         setUser({ ...authUser, ...data } as TUser);
-        if (
-          location.pathname.includes("signin") ||
-          location.pathname.includes("signup")
-        ) {
-          navigate("/dashboard");
-        } else {
-          navigate(location.pathname);
-        }
-        setLoading(false);
+        navigate("/dashboard");
       } catch (error) {
         console.log(error);
       } finally {
@@ -93,8 +84,7 @@ const AuthProvider: FC<TAuthProviderProps> = ({ children }) => {
       setErrorMsg("");
       setProcessing(true);
       if (email && password) {
-        const user = await signInWithEmailAndPassword(auth, email, password);
-        console.log(user);
+        await signInWithEmailAndPassword(auth, email, password);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {

@@ -12,8 +12,6 @@ const AuthGuard = ({
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  console.log("from auth guard", user);
-
   if (!user) return <Navigate to="/signin" />;
 
   if (admin && user.role !== "admin") {
