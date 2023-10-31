@@ -36,14 +36,14 @@ const SignInPage = () => {
 
         <div className="mt-4">
           <Button type="submit" className="w-full" disabled={processing}>
-            {processing ? "Please wait..." : "Register"}
+            {processing ? "Please wait..." : "Sign In"}
           </Button>
         </div>
         <div className="text-sm text-gray-900">
           Don't have an account?{" "}
           <Button variant="link">
             <Link to="/signup" className="text-blue">
-              Sign In
+              Sign Up
             </Link>
           </Button>
         </div>
