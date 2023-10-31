@@ -5,14 +5,9 @@ type CircularProgressProps = {
   className: string;
   size?: number;
 };
-const CirclarProgress: React.FC<CircularProgressProps> = ({
-  size,
-  className,
-}) => {
+const CirclarProgress: React.FC<CircularProgressProps> = ({ className }) => {
   return (
-    <div
-      className={cn("relative h-40 w-40", size ? `w-${size} h-${size}` : "")}
-    >
+    <div className={cn("relative h-16 w-16")}>
       <svg className="w-full h-full" viewBox="0 0 100 100">
         <circle
           className="text-blue-100 stroke-current"
