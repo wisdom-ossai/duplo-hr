@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { buttonVariants } from "./ui/Button";
+import { Button, buttonVariants } from "./ui/Button";
 import { cn } from "@/lib/utils";
 import {
   Calendar,
@@ -13,6 +13,7 @@ import {
   Site,
 } from "@/components/icons";
 import { useAuth } from "@/contexts/AuthProvider";
+import { AlignLeft } from "lucide-react";
 
 const routes = [
   {
@@ -93,14 +94,23 @@ const routes = [
   },
 ];
 
-const Leftbar = () => {
+const Leftbar = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const { user } = useAuth();
   const location = useLocation();
 
   return (
-    <aside className="w-16 md:w-[300px] lg:w-[400px] flex flex-col justify-center items-center gap-12 h-full bg-white px-4">
-      <div className="mt-8 w-full">
-        <h1 className="text-gray-900 font-bold text-lg">Human R.</h1>
+    <aside
+      className={cn(
+        "fixed left-0 top-0 bottom-0 z-50 slide-in-from-left-6 md:w-[275px] lg:w-[375px] md:block md:relative flex flex-col justify-center items-center gap-12 h-full bg-white px-4",
+        open ? "flex" : "hidden"
+      )}
+    >
+      <div className="mt-8 w-full flex items-center justify-between">
+        <h1 className="text-gray-900 font-bold text-lg ml-8">Human R.</h1>
+
+        <Button variant="ghost" className="block md:hidden" onClick={onClose}>
+          <AlignLeft />
+        </Button>
       </div>
       <div className="flex-1 w-full">
         <div className="flex flex-col gap-8">
