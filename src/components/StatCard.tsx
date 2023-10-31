@@ -18,7 +18,7 @@ const StatCard: React.FC<StatCardProps> = ({ data }) => {
           <div
             className={cn(
               "h-4 w-4 flex items-center justify-center rounded-full",
-              `bg-${data.color}-100`
+              data.bgClass
             )}
           >
             <TrendUp className={`fill-${data.color}`} color={data.color} />
@@ -29,7 +29,7 @@ const StatCard: React.FC<StatCardProps> = ({ data }) => {
         </div>
       </div>
       <div>
-        <CirclarProgress size={16} />
+        <CirclarProgress size={16} className={data.textClass} />
       </div>
     </Card>
   );

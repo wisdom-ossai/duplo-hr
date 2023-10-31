@@ -6,6 +6,8 @@ export type TStatData = {
   totalPercentage: number;
   newPercent: number;
   color: string;
+  bgClass: string;
+  textClass: string;
 };
 
 export type TCreateUser = {

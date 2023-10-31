@@ -2,9 +2,13 @@ import { cn } from "@/lib/utils";
 import React from "react";
 
 type CircularProgressProps = {
+  className: string;
   size?: number;
 };
-const CirclarProgress: React.FC<CircularProgressProps> = ({ size }) => {
+const CirclarProgress: React.FC<CircularProgressProps> = ({
+  size,
+  className,
+}) => {
   return (
     <div
       className={cn("relative h-40 w-40", size ? `w-${size} h-${size}` : "")}
@@ -19,7 +23,10 @@ const CirclarProgress: React.FC<CircularProgressProps> = ({ size }) => {
           fill="transparent"
         ></circle>
         <circle
-          className="text-indigo-500  progress-ring__circle stroke-current"
+          className={cn(
+            "text-indigo-500  progress-ring__circle stroke-current",
+            className
+          )}
           strokeWidth="10"
           strokeLinecap="round"
           cx="50"
