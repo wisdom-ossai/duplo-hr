@@ -12,20 +12,22 @@ import {
   Setting,
   Site,
 } from "@/components/icons";
+import { useAuth } from "@/contexts/AuthProvider";
 
 const routes = [
   {
     name: "MENU",
     items: [
       {
-        name: "Users",
-        icon: (active: boolean) => <Profile active={active} />,
-        path: "/users",
-      },
-      {
         name: "Dashboard",
         icon: (active: boolean) => <Dashboard active={active} />,
         path: "/dashboard",
+      },
+      {
+        name: "Users",
+        icon: (active: boolean) => <Profile active={active} />,
+        path: "/users",
+        admin: true,
       },
       {
         name: "Messages",
@@ -92,7 +94,9 @@ const routes = [
 ];
 
 const Leftbar = () => {
+  const { user } = useAuth();
   const location = useLocation();
+
   return (
     <aside className="w-16 lg:w-[400px] flex flex-col justify-center items-center gap-12 h-full bg-white px-4">
       <div className="mt-8 w-full">
@@ -104,28 +108,31 @@ const Leftbar = () => {
             <div className="flex flex-col w-full gap-4" key={route.name}>
               <p className="ml-8 text-sm">{route.name}</p>
               <ul className="flex flex-col gap-2 w-full">
-                {route.items.map((item) => (
-                  <li key={item.name}>
-                    <Link
-                      to={item.path}
-                      className={cn(
-                        buttonVariants({
-                          variant: location.pathname.includes(item.path)
-                            ? "default"
-                            : "ghost",
-                          size: "lg",
-                        }),
-                        "w-full justify-start gap-4 rounded-xl",
-                        location.pathname.includes(item.path)
-                          ? ""
-                          : "text-gray-200"
-                      )}
-                    >
-                      {item.icon(location.pathname.includes(item.path))}
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
+                {route.items.map((item) => {
+                  if (item.admin && user?.role !== "admin") return null;
+                  return (
+                    <li key={item.name}>
+                      <Link
+                        to={item.path}
+                        className={cn(
+                          buttonVariants({
+                            variant: location.pathname.includes(item.path)
+                              ? "default"
+                              : "ghost",
+                            size: "lg",
+                          }),
+                          "w-full justify-start gap-4 rounded-xl",
+                          location.pathname.includes(item.path)
+                            ? ""
+                            : "text-gray-200"
+                        )}
+                      >
+                        {item.icon(location.pathname.includes(item.path))}
+                        {item.name}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

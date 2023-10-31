@@ -20,7 +20,7 @@ interface DataTableProps<TData, TValue> {
   loading: boolean;
 }
 
-export function DataTable<TData, TValue>({
+export default function DataTable<TData, TValue>({
   columns,
   data,
   loading,

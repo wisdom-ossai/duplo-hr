@@ -3,7 +3,7 @@ import { TrendUp } from "./icons";
 import { TStatData } from "@/types";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui";
-import CirclarProgress from "./CirclarProgress";
+import CirclarProgress from "./CircularProgress";
 
 type StatCardProps = {
   data: TStatData;

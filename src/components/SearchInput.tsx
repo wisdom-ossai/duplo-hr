@@ -9,7 +9,7 @@ const SearchInput = () => {
         className="border rounded-e-none shadow-none dark:shadow-none bg-white border-none focus-visible:ring-0"
         placeholder="Search by anything"
       />
-      <Button className="rounded-s-none rounded-e-xl focus:outline-none">
+      <Button className="rounded-s-none rounded-e-xl focus:outline-none px-2">
         <Search />
       </Button>
     </div>

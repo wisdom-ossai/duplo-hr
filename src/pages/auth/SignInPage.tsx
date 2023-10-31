@@ -10,7 +10,6 @@ const SignInPage = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(emailRef.current?.value, passwordRef.current?.value);
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
     if (email && password) {

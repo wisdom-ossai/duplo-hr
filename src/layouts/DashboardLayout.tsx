@@ -3,7 +3,8 @@ import { useAuth } from "@/contexts/AuthProvider";
 import { Leftbar, Navbar, Rightbar } from "@/components";
 
 const DashboardLayout = () => {
-  const { signout } = useAuth();
+  const { signout, user } = useAuth();
+  console.log(user);
   return (
     <div className="h-screen w-full flex">
       <Leftbar />

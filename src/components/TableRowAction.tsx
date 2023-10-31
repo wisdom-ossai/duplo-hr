@@ -7,17 +7,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/Dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from "./ui/Select";
 import { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/config/firebase";
+import { useToast } from "./ui/use-toast";
 
 const roleOptions = [
   {
@@ -30,7 +31,7 @@ const roleOptions = [
   },
 ];
 
-export function TableRowAction({
+export default function TableRowAction({
   id,
   role,
   label,
@@ -43,6 +44,7 @@ export function TableRowAction({
   role: string;
   description?: string;
 }) {
+  const { toast } = useToast();
   const [value, setValue] = useState(role);
   const [open, setOpen] = useState(false);
   const [processing, setProcessing] = useState(false);
@@ -56,6 +58,11 @@ export function TableRowAction({
       await updateDoc(userRef, { role: value });
 
       handleOpenChange();
+      toast({
+        title: "Scheduled: Catch up",
+        description: "Record updated successfully",
+        variant: "success",
+      });
     } catch (error) {
       console.log(error);
     } finally {

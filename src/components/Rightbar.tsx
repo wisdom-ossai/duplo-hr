@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui";
 import NeedHelp from "./icons/NeedHelp";
 import NotificationBing from "./icons/NotificationBing";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import RightItems from "./RightItems";
 import { ScrollArea } from "./ui/scroll-area";
 

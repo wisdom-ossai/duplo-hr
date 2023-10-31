@@ -1,3 +1,5 @@
+import { User } from "firebase/auth";
+
 export type TStatData = {
   name: string;
   value: number;
@@ -15,9 +17,10 @@ export type TCreateUser = {
   designation: string;
 };
 
-export type User = TCreateUser & {
-  isActive: boolean;
-  photoUrl: string;
-  role: "admin" | "user" | "hr";
-  id: string;
-};
+export type TUser = User &
+  TCreateUser & {
+    isActive: boolean;
+    photoUrl: string;
+    role: "admin" | "user" | "hr";
+    id: string;
+  };

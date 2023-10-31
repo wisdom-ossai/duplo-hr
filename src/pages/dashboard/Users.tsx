@@ -1,5 +1,4 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { DataTable } from "@/components/DataTable";
 import { useEffect, useState } from "react";
 import {
   DocumentData,
@@ -10,12 +9,14 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "@/config/firebase";
-import { User } from "@/types";
-import { TableRowAction } from "@/components/TableRowAction";
+import { TUser } from "@/types";
 import { Card } from "@/components/ui";
+import { useToast } from "@/components/ui/use-toast";
+import { DataTable, TableRowAction } from "@/components";
 
 const Users = () => {
-  const [users, setUsers] = useState<User[]>([]);
+  const { toast } = useToast();
+  const [users, setUsers] = useState<TUser[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -24,16 +25,20 @@ const Users = () => {
       where("role", "!=", "admin")
     );
     const fetchUsers = async () => {
-      const payload: User[] = [];
+      const payload: TUser[] = [];
       setLoading(true);
       try {
         const querySnapshot = await getDocs(queryRef);
         querySnapshot.forEach((doc) => {
-          payload.push({ ...doc.data(), id: doc.id } as User);
+          payload.push({ ...doc.data(), id: doc.id } as TUser);
         });
         setUsers(payload);
       } catch (error) {
         console.log(error);
+        toast({
+          title: "Unable to fetch Users",
+          variant: "destructive",
+        });
       } finally {
         setLoading(false);
       }
@@ -42,9 +47,9 @@ const Users = () => {
     fetchUsers();
 
     const unsubscribe = onSnapshot(queryRef, (querySnapshot) => {
-      const payload: User[] = [];
+      const payload: TUser[] = [];
       querySnapshot.forEach((doc: DocumentData) => {
-        payload.push({ ...doc.data(), id: doc.id } as User);
+        payload.push({ ...doc.data(), id: doc.id } as TUser);
       });
       setUsers(payload);
     });
@@ -58,7 +63,7 @@ const Users = () => {
 
   console.log(users);
 
-  const columns: ColumnDef<User>[] = [
+  const columns: ColumnDef<TUser>[] = [
     {
       accessorKey: "fullName",
       header: "Name",

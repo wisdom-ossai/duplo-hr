@@ -22,11 +22,12 @@ ChartJS.register(
 
 export const options = {
   plugins: {},
-  // responsive: true,
-  // interaction: {
-  //   mode: "index" as const,
-  //   intersect: false,
-  // },
+  responsive: true,
+  interaction: {
+    mode: "index" as const,
+    intersect: false,
+  },
+
   scales: {
     x: {
       stacked: true,
@@ -43,25 +44,40 @@ export const data = {
   labels,
   datasets: [
     {
-      label: "Dataset 1",
+      label: "",
       data: [40, 85, 38, 66, 23, 100, 42],
-      backgroundColor: "rgb(255, 99, 132)",
-      stack: "Stack 0",
-      borderWidth: 1,
+      backgroundColor: "#57ccf2",
+      borderRadius: [
+        { topLeft: 12, topRight: 12, bottomLeft: 12, bottomRight: 12 },
+        { topLeft: 12, topRight: 12, bottomLeft: 12, bottomRight: 12 },
+      ],
+      borderSkipped: false,
+      barPercentage: 0.15,
+      categoryPercentage: 0.5,
     },
     {
-      label: "Dataset 2",
+      label: "",
       data: [40, 85, 38, 66, 23, 100, 42],
-      backgroundColor: "rgb(75, 192, 192)",
-      stack: "Stack 0",
-      borderWidth: 1,
+      backgroundColor: "#ffb833",
+      borderRadius: [
+        { topLeft: 12, topRight: 12, bottomLeft: 12, bottomRight: 12 },
+        { topLeft: 12, topRight: 12, bottomLeft: 12, bottomRight: 12 },
+      ],
+      borderSkipped: false,
+      barPercentage: 0.15,
+      categoryPercentage: 0.5,
     },
     {
-      label: "Dataset 3",
+      label: "",
       data: [40, 85, 38, 66, 23, 100, 42],
-      backgroundColor: "rgb(53, 162, 235)",
-      stack: "Stack 0",
-      borderWidth: 1,
+      backgroundColor: "#ff7859",
+      borderRadius: [
+        { topLeft: 12, topRight: 12, bottomLeft: 12, bottomRight: 12 },
+        { topLeft: 12, topRight: 12, bottomLeft: 12, bottomRight: 12 },
+      ],
+      borderSkipped: false,
+      barPercentage: 0.15,
+      categoryPercentage: 0.5,
     },
   ],
 };

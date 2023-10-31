@@ -7,19 +7,18 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
-  User,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
 import { auth, db } from "@/config/firebase";
 import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
-import { TCreateUser } from "@/types";
+import { TCreateUser, TUser } from "@/types";
 
 export type TAuthContext = {
-  user: User | null;
+  user: TUser | null;
   signin: (email: string, password: string) => Promise<void>;
   signup: (payload: TCreateUser) => Promise<void>;
   signout: () => Promise<void>;
@@ -43,8 +42,9 @@ export const useAuth = () => {
 };
 
 const AuthProvider: FC<TAuthProviderProps> = ({ children }) => {
+  const location = useLocation();
   const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<TUser | null>(null);
   const [processing, setProcessing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
@@ -61,11 +61,24 @@ const AuthProvider: FC<TAuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
-      setLoading(false);
-      if (!authUser) return navigate("/");
-      const data = await fetchUserById(authUser.uid);
-      setUser({ ...authUser, ...data });
-      navigate("/dashboard");
+      try {
+        if (!authUser) return navigate("/");
+        const data = await fetchUserById(authUser.uid);
+        setUser({ ...authUser, ...data } as TUser);
+        if (
+          location.pathname.includes("signin") ||
+          location.pathname.includes("signup")
+        ) {
+          navigate("/dashboard");
+        } else {
+          navigate(location.pathname);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     });
 
     return () => {
