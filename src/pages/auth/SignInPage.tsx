@@ -1,6 +1,6 @@
 import { FormEvent, RefObject, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Input } from "@/components/ui";
+import { Button, Input } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthProvider";
 
 const SignInPage = () => {
@@ -34,13 +34,18 @@ const SignInPage = () => {
           />
         </div>
 
-        <div>
-          <button type="submit" disabled={processing}>
-            {processing ? "Please wait..." : "Sign In"}
-          </button>
+        <div className="mt-4">
+          <Button type="submit" className="w-full" disabled={processing}>
+            {processing ? "Please wait..." : "Register"}
+          </Button>
         </div>
-        <div>
-          Don't have an account? <Link to="/signup">Sign Up</Link>
+        <div className="text-sm text-gray-900">
+          Don't have an account?{" "}
+          <Button variant="link">
+            <Link to="/signup" className="text-blue">
+              Sign In
+            </Link>
+          </Button>
         </div>
       </form>
     </div>

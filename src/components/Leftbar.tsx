@@ -13,7 +13,7 @@ import {
   Site,
 } from "@/components/icons";
 import { useAuth } from "@/contexts/AuthProvider";
-import { AlignLeft } from "lucide-react";
+import { AlignLeft, LogOut } from "lucide-react";
 
 const routes = [
   {
@@ -95,57 +95,68 @@ const routes = [
 ];
 
 const Leftbar = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
-  const { user } = useAuth();
+  const { user, signout } = useAuth();
   const location = useLocation();
 
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 bottom-0 z-50 slide-in-from-left-6 md:w-[275px] lg:w-[375px] md:block md:relative flex flex-col justify-center items-center gap-12 h-full bg-white px-4",
+        "fixed left-0 top-0 bottom-0 z-50 slide-in-from-left-6 md:w-[275px] lg:w-[375px] md:block md:relative h-full bg-white px-4",
         open ? "flex" : "hidden"
       )}
     >
-      <div className="mt-8 w-full flex items-center justify-between">
-        <h1 className="text-gray-900 font-bold text-lg ml-8">Human R.</h1>
+      <div className="flex flex-col justify-center items-start gap-12">
+        <div className="mt-8 w-full flex items-center justify-between">
+          <h1 className="text-gray-900 font-bold text-lg ml-8">Human R.</h1>
 
-        <Button variant="ghost" className="block md:hidden" onClick={onClose}>
-          <AlignLeft />
-        </Button>
-      </div>
-      <div className="flex-1 w-full">
-        <div className="flex flex-col gap-8">
-          {routes.map((route) => (
-            <div className="flex flex-col w-full gap-4" key={route.name}>
-              <p className="ml-8 text-sm">{route.name}</p>
-              <ul className="flex flex-col gap-2 w-full">
-                {route.items.map((item) => {
-                  if (item.admin && user?.role !== "admin") return null;
-                  return (
-                    <li key={item.name}>
-                      <Link
-                        to={item.path}
-                        className={cn(
-                          buttonVariants({
-                            variant: location.pathname.includes(item.path)
-                              ? "default"
-                              : "ghost",
-                            size: "lg",
-                          }),
-                          "w-full justify-start gap-4 rounded-xl",
-                          location.pathname.includes(item.path)
-                            ? ""
-                            : "text-gray-200"
-                        )}
-                      >
-                        {item.icon(location.pathname.includes(item.path))}
-                        {item.name}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ))}
+          <Button variant="ghost" className="block md:hidden" onClick={onClose}>
+            <AlignLeft />
+          </Button>
+        </div>
+        <div className="flex-1 w-full">
+          <div className="flex flex-col gap-8">
+            {routes.map((route) => (
+              <div className="flex flex-col w-full gap-4" key={route.name}>
+                <p className="ml-8 text-sm">{route.name}</p>
+                <ul className="flex flex-col gap-2 w-full">
+                  {route.items.map((item) => {
+                    if (item.admin && user?.role !== "admin") return null;
+                    return (
+                      <li key={item.name}>
+                        <Link
+                          to={item.path}
+                          className={cn(
+                            buttonVariants({
+                              variant: location.pathname.includes(item.path)
+                                ? "default"
+                                : "ghost",
+                              size: "lg",
+                            }),
+                            "w-full justify-start gap-4 rounded-xl",
+                            location.pathname.includes(item.path)
+                              ? ""
+                              : "text-gray-200"
+                          )}
+                        >
+                          {item.icon(location.pathname.includes(item.path))}
+                          {item.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-full">
+          <Button
+            variant="ghost"
+            className="p-0 w-full justify-start pl-8"
+            onClick={() => signout()}
+          >
+            <LogOut /> Logout
+          </Button>
         </div>
       </div>
     </aside>
