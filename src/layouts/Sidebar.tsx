@@ -5,7 +5,6 @@ import { useAuth } from "@/contexts/AuthProvider";
 import { cn } from "@/lib/utils";
 import clsx from "clsx";
 import { X } from "lucide-react";
-import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 type SidebarProps = {

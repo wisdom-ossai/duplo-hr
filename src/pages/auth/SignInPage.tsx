@@ -2,6 +2,7 @@ import { FormEvent, RefObject, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button, Input } from "@/components/ui";
 import { useAuth } from "@/contexts/AuthProvider";
+import { AlertTriangle } from "lucide-react";
 
 const SignInPage = () => {
   const { signin, errorMsg, processing } = useAuth();
@@ -18,7 +19,11 @@ const SignInPage = () => {
   };
   return (
     <div>
-      {errorMsg && <div>{errorMsg}</div>}
+      {errorMsg && (
+        <div className="flex items-center px-4 py-2 text-red bg-red-200 border border-red-500 rounded-md mb-4">
+          <AlertTriangle className="text-red mr-4" /> {errorMsg}
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
         <div>
           <label>Email</label>

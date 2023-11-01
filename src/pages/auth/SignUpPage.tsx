@@ -89,7 +89,9 @@ const SignUpPage = () => {
           Please enter details to sign up
         </small>
       </div>
-      {errorMsg && <div>{errorMsg}</div>}
+      {errorMsg && (
+        <div className="p-4 text-red bg-red-200 border-red-500">{errorMsg}</div>
+      )}
       <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
         <div>
           <label className="text-sm text-gray-200" htmlFor="firstName">

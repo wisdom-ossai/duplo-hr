@@ -4,17 +4,25 @@ import NotificationBing from "@/components/icons/NotificationBing";
 import { Person3 } from "@/components/icons/Person1";
 import { Button } from "@/components/ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/DropdownMenu";
 import { useAuth } from "@/contexts/AuthProvider";
 import { jobsData, messagesData } from "@/utils/data";
 import clsx from "clsx";
-import { X } from "lucide-react";
+import { LogOut, X } from "lucide-react";
 
 type RightSideProps = {
   onRightSideHide: () => void;
   showRightSide: boolean;
 };
 const RightSide = ({ onRightSideHide, showRightSide }: RightSideProps) => {
-  const { user } = useAuth();
+  const { user, signout } = useAuth();
   return (
     <div
       className={clsx(
@@ -39,12 +47,27 @@ const RightSide = ({ onRightSideHide, showRightSide }: RightSideProps) => {
               <Button variant="ghost" className="p-0 rounded-full">
                 <NotificationBing />
               </Button>
-              <Avatar style={{ height: 24, width: 24 }}>
-                <AvatarImage src={user?.photoURL ?? ""} alt={user?.firstName} />
-                <AvatarFallback>
-                  <Person3 />
-                </AvatarFallback>
-              </Avatar>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Avatar style={{ height: 24, width: 24 }}>
+                    <AvatarImage
+                      src={user?.photoURL ?? ""}
+                      alt={user?.firstName}
+                    />
+                    <AvatarFallback>
+                      <Person3 />
+                    </AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Profile</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => signout()}>
+                    <LogOut className="text-gray-500 me-1" /> Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
